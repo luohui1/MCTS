@@ -34,6 +34,7 @@ from mcts.analyzers.npm_audit import NpmAuditAnalyzer
 from mcts.analyzers.oauth_config import OAuthConfigAnalyzer
 from mcts.analyzers.path_validation import PathValidationAnalyzer
 from mcts.analyzers.permissions import PermissionAnalyzer
+from mcts.analyzers.prompt_dedupe import dedupe_prompt_findings
 from mcts.analyzers.prompt_defense import PromptDefenseAnalyzer
 from mcts.analyzers.prompt_injection import PromptInjectionAnalyzer
 from mcts.analyzers.resource_limits import ResourceLimitsAnalyzer
@@ -246,6 +247,7 @@ class Scanner:
             scan_notes_pre.append(probe_note)
 
         findings = dedupe_metadata_findings(findings)
+        findings = dedupe_prompt_findings(findings)
         findings = dedupe_sigma_findings(findings)
         findings = enrich_findings(findings)
 
