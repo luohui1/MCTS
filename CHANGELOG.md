@@ -102,6 +102,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **`_has_proven_path`** — empty `finding_ids` no longer marks every chain as proven
 - **Compliance rows** — receive `rule_stability` after pipeline append
 
+### Changed
+
+- `mcts doctor` now reports the optional `[api]` extra on default runs, and `mcts serve` points missing REST API dependencies back to doctor preflight checks (#218).
+
 ## [0.1.4] - 2026-06-12
 
 ### Security
