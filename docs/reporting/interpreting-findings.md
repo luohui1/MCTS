@@ -124,6 +124,10 @@ Click **Details ↓** (or the row) to expand **Evidence** — full JSON for that
 
 The one-line preview under the title (`read_tools: ask_sales_agent_tool; exfil_tools: …`) comes from `format_evidence_summary()`, which only promotes a **subset** of keys (`read_tools`, `exfil_tools`, …). Other keys (`credential_tools`, `path`, `hop_count`) may appear only in the expanded JSON.
 
+### Repeated prompt content
+
+MCTS can merge prompt-injection findings for repeated prompt or instruction text into one reported finding. Each finding must have a source file, and its finding type, text field, severity, and `evidence.content_hash` must match. The hash uses SHA-256 after normalizing CRLF/CR line endings to LF and trimming surrounding whitespace. The first finding keeps its primary location. When multiple distinct locations are merged, `evidence.also_found_in` records their file paths and available line numbers, including the primary location; inspect the expanded Evidence JSON to find those copies. Different normalized contents remain separate, including within the same file. Findings without a source file or content hash are not eligible for this merge.
+
 ---
 
 ## Deep dive: attack chain findings
